@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  * @author Diaz
  */
 public class Login extends javax.swing.JFrame {
+
     public static Connection cn;
     public static ResultSet rs;
     public static Statement st;
@@ -119,10 +120,11 @@ public class Login extends javax.swing.JFrame {
             if (rs.next()) {
                 // Kombinasi email dan kata sandi cocok dalam database
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
-                if (isadmin.isFocusOwner())
+                if (isadmin.isSelected()) {
                     new Management().setVisible(true);
-                else
+                } else {
                     new Order().setVisible(true);
+                }
             } else {
                 // Kombinasi email dan kata sandi tidak cocok
                 JOptionPane.showMessageDialog(null, "Email atau Password salah");

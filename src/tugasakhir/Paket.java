@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Diaz
  */
 public class Paket extends javax.swing.JFrame {
+
     public static Connection cn;
     public static ResultSet rs;
     public static Statement st;
@@ -25,6 +26,23 @@ public class Paket extends javax.swing.JFrame {
     public Paket() {
         initComponents();
         datatable();
+    }
+
+    public String generate_id() {
+        int row = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM paket";
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                row = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
+        }
+        String id = "PAKET" + String.valueOf(row + 1);
+        return id;
     }
 
     public void datatable() {
@@ -49,6 +67,7 @@ public class Paket extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
+        txtKode.setText(generate_id());
     }
 
     /**
@@ -89,6 +108,13 @@ public class Paket extends javax.swing.JFrame {
         jLabel2.setText("Nama Paket");
 
         jLabel3.setText("Tarif");
+
+        txtKode.setEnabled(false);
+        txtKode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKodeActionPerformed(evt);
+            }
+        });
 
         Tambah.setText("Tambah");
         Tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -273,6 +299,10 @@ public class Paket extends javax.swing.JFrame {
         // Update table
         datatable();
     }//GEN-LAST:event_SimpanActionPerformed
+
+    private void txtKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKodeActionPerformed
 
     /**
      * @param args the command line arguments
