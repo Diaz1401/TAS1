@@ -5,6 +5,7 @@
 package tugasakhir;
 
 import TugasAkhir.KoneksiKashoes;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,16 +13,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static tugasakhir.Order.cn;
-import static tugasakhir.Order.pst;
-import static tugasakhir.Order.rs;
-import static tugasakhir.Order.st;
 
 /**
  *
  * @author LENOVO
  */
 public class MasterOrder extends javax.swing.JFrame {
+
+    public static Connection cn;
+    public static ResultSet rs;
+    public static Statement st;
+    public static PreparedStatement pst;
 
     /**
      * Creates new form MasterOrder
@@ -31,8 +33,7 @@ public class MasterOrder extends javax.swing.JFrame {
         txtTransaksi.setText(generate_id());
         txtTransaksiDetil.setText(generate_idDet());
         table();
-        
-        
+
     }
 
     /**
@@ -334,45 +335,18 @@ public class MasterOrder extends javax.swing.JFrame {
 
     private void TabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelMouseClicked
         // TODO add your handling code here:
-        try {
-            java.sql.Connection kon = KoneksiKashoes.koneksikashoesdB();
-            String sql = "SELECT * FROM transaksi WHERE id_transaksi ='"+txtTransaksi.getText()+"'";
-            Statement st = kon.createStatement();
-            ResultSet rs = (ResultSet) st.executeQuery(sql);
-           
-                    int bar = Tabel.getSelectedRow();
-                       String a = Tabel.getValueAt(bar,0).toString();
-                       String b = Tabel.getValueAt(bar,1).toString();
-                       String c = Tabel.getValueAt(bar,2).toString();
-                       String d = Tabel.getValueAt(bar,3).toString();
-                       String e = Tabel.getValueAt(bar,4).toString();
-                       
-
-                       txtTransaksi.setText(a);
-                       txtNama.setText(b);
-                       txtJumlah.setText(c);
-                       txtTelephone.setText(d);
-                       txtTotal.setText(e);
-                      
-                            
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "data tidak ditemukan");
-                
-
-            }
         int bar = Tabel.getSelectedRow();
-            String a = Tabel.getValueAt(bar,0).toString();
-            String b = Tabel.getValueAt(bar,1).toString();
-            String c = Tabel.getValueAt(bar,2).toString();
-            String d = Tabel.getValueAt(bar,3).toString();           
-            String e = Tabel.getValueAt(bar,4).toString();
-                                
+        String a = Tabel.getValueAt(bar, 0).toString();
+        String b = Tabel.getValueAt(bar, 1).toString();
+        String c = Tabel.getValueAt(bar, 2).toString();
+        String d = Tabel.getValueAt(bar, 3).toString();
+        String e = Tabel.getValueAt(bar, 4).toString();
 
-           txtTransaksi.setText(a);
-           txtNama.setText(b);
-           txtJumlah.setText(c);
-           txtTelephone.setText(d);
-           txtTotal.setText(e);        
+        txtTransaksi.setText(a);
+        txtNama.setText(b);
+        txtJumlah.setText(c);
+        txtTelephone.setText(d);
+        txtTotal.setText(e);
     }//GEN-LAST:event_TabelMouseClicked
 
     private void txtJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlahActionPerformed
@@ -389,46 +363,18 @@ public class MasterOrder extends javax.swing.JFrame {
 
     private void tabeldetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeldetMouseClicked
         // TODO add your handling code here:
-        try {
-            java.sql.Connection kon = KoneksiKashoes.koneksikashoesdB();
-            String sql = "SELECT * FROM transaksi_detil WHERE id_transaksidetil ='"+txtTransaksiDetil.getText()+"'";
-            Statement st = kon.createStatement();
-            ResultSet rs = (ResultSet) st.executeQuery(sql);
-           
-                    int bar = tabeldet.getSelectedRow();
-                       String a = tabeldet.getValueAt(bar,0).toString();
-                       String b = tabeldet.getValueAt(bar,1).toString();
-                       String c = tabeldet.getValueAt(bar,2).toString();
-                       String d = tabeldet.getValueAt(bar,3).toString();
-                       String e = tabeldet.getValueAt(bar,4).toString();
-                       
-                       
-                       txtTransaksiDetil.setText(a);
-                       txtTransaksi.setText(b);
-                       txtKode.setText(c);
-                       txtBahan.setText(d);
-                       txtKeterangan.setText(e);
-                       
-                      
-                            
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "data tidak ditemukan");
-                
-
-            }
         int bar = tabeldet.getSelectedRow();
-            String a = tabeldet.getValueAt(bar,0).toString();
-            String b = tabeldet.getValueAt(bar,1).toString();
-            String c = tabeldet.getValueAt(bar,2).toString();
-            String d = tabeldet.getValueAt(bar,3).toString();
-            String e = tabeldet.getValueAt(bar,4).toString();
-                                
+        String a = tabeldet.getValueAt(bar, 0).toString();
+        String b = tabeldet.getValueAt(bar, 1).toString();
+        String c = tabeldet.getValueAt(bar, 2).toString();
+        String d = tabeldet.getValueAt(bar, 3).toString();
+        String e = tabeldet.getValueAt(bar, 4).toString();
 
-           txtTransaksiDetil.setText(a);
-           txtTransaksi.setText(b);
-           txtKode.setText(c);
-           txtBahan.setText(d);
-           txtKeterangan.setText(e);            
+        txtTransaksiDetil.setText(a);
+        txtTransaksi.setText(b);
+        txtKode.setText(c);
+        txtBahan.setText(d);
+        txtKeterangan.setText(e);
     }//GEN-LAST:event_tabeldetMouseClicked
 
     private void txtKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKodeActionPerformed
@@ -458,9 +404,10 @@ public class MasterOrder extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
         String id = "TR" + String.valueOf(row + 1);
-        
+
         return id;
     }
+
     public String generate_idDet() {
         int row = 0;
         try {
@@ -478,97 +425,87 @@ public class MasterOrder extends javax.swing.JFrame {
 
         return iddet;
     }
-    private void tambah(){
-     try{
 
-            Connection kon = KoneksiKashoes.koneksikashoesdB();
-            Statement st = kon.createStatement();
+    private void tambah() {
+        try {
 
-            PreparedStatement prs = kon.prepareStatement("INSERT INTO transaksi (id_transaksi,nama,no_telp,jml_sepatu,total_bayar) VALUES(?,?,?,?,?)"); 
-            
-            prs.setString(1, txtTransaksi.getText());
-            prs.setString(2, txtNama.getText());
-            prs.setString(3, txtJumlah.getText());
-            prs.setString(4, txtTelephone.getText());
-            prs.setString(5, txtTotal.getText());
-            prs.execute();
-             JOptionPane.showMessageDialog(null, "Data Berhasil Di Masukan");
-            }
-        catch(Exception e){
-           JOptionPane.showMessageDialog(null, e);
-           System.out.println(e.getMessage());
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+
+            pst = cn.prepareStatement("INSERT INTO transaksi (id_transaksi,nama,no_telp,jml_sepatu,total_bayar) VALUES(?,?,?,?,?)");
+
+            pst.setString(1, txtTransaksi.getText());
+            pst.setString(2, txtNama.getText());
+            pst.setString(3, txtJumlah.getText());
+            pst.setString(4, txtTelephone.getText());
+            pst.setString(5, txtTotal.getText());
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Masukan");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal menambahkan data: " + e.getMessage());
         }
     }
-      private void table(){    
-        
-        
-         
-         Object header[] = {"id_transaksi","nama","no_telp","jml_sepatu","total_bayar"};
-         DefaultTableModel data = new DefaultTableModel(null,header);
-         String sql_data = "SELECT id_transaksi,Nama,no_telp,jml_sepatu,total_bayar FROM transaksi ORDER BY id_transaksi ASC";
-         
-         Object headerDet[] = {"id_transaksidetil","id_transaksi","id_paket","bahan","keterangan"};
-         DefaultTableModel dataDet = new DefaultTableModel(null,headerDet);
-         String sql_dataDet = "SELECT id_transaksidetil,id_transaksi,id_paket,bahan,keterangan FROM transaksi_detil ORDER BY id_transaksidetil ASC";
-         
-         //tabel transaksi
-         try{
-             Connection kon = KoneksiKashoes.koneksikashoesdB();
-             Statement st = kon.createStatement();
-             ResultSet rs = st.executeQuery(sql_data);
-             while(rs.next()){
-                 String d1 = rs.getString(1);
-                 String d2 = rs.getString(2);
-                 String d3 = rs.getString(3);
-                 String d4 = rs.getString(4);
-                 String d5 = rs.getString(5);
-                 
 
-                
-                 
-                 String d[] = {d1,d2,d3,d4,d5};
-                 data.addRow(d);
-                 
-                 
-             }
-             
-            Tabel.setModel(data);
-         }
-         catch(Exception e){
-             JOptionPane.showMessageDialog(null, e);
-         }
-         
-         //tabel transaksi detil
-         try{
-             Connection kon = KoneksiKashoes.koneksikashoesdB();
-             Statement st = kon.createStatement();
-             ResultSet rs = st.executeQuery(sql_dataDet);
-             while(rs.next()){
-                 String d1 = rs.getString(1);
-                 String d2 = rs.getString(2);
-                 String d3 = rs.getString(3);
-                 String d4 = rs.getString(4);
-                 String d5 = rs.getString(5);
-                 
+    private void table() {
+        DefaultTableModel tbl = new DefaultTableModel(), tblDet = new DefaultTableModel();
+        tbl.addColumn("ID Transaksi");
+        tbl.addColumn("Nama");
+        tbl.addColumn("Telephone");
+        tbl.addColumn("Jumlah");
+        tbl.addColumn("Total Harga");
+        tblDet.addColumn("ID Transaksi Detil");
+        tblDet.addColumn("ID Transaksi");
+        tblDet.addColumn("ID Paket");
+        tblDet.addColumn("Bahan");
+        tblDet.addColumn("Keterangan");
+        tblDet.addColumn("Tanggal");
 
-                
-                 
-                 String d[] = {d1,d2,d3,d4,d5};
-                 dataDet.addRow(d);
-                 
-                 
-             }
-             
-            tabeldet.setModel(dataDet);
-         }
-         catch(Exception e){
-             JOptionPane.showMessageDialog(null, e);
-         }
-         
-         
+        String sql_data = "SELECT * FROM transaksi ORDER BY id_transaksi ASC";
+
+        String sql_dataDet = "SELECT * FROM transaksi_detil ORDER BY id_transaksidetil ASC";
+
+        //tabel transaksi
+        try {
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql_data);
+            while (rs.next()) {
+                tbl.addRow(new Object[]{
+                    rs.getString("id_transaksi"),
+                    rs.getString("nama"),
+                    rs.getString("no_telp"),
+                    rs.getString("jml_sepatu"),
+                    rs.getString("total_bayar")
+                });
+            }
+            Tabel.setModel(tbl);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        //tabel transaksi detil
+        try {
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql_dataDet);
+            while (rs.next()) {
+                tblDet.addRow(new Object[]{
+                    rs.getString("id_transaksidetil"),
+                    rs.getString("id_transaksi"),
+                    rs.getString("id_paket"),
+                    rs.getString("bahan"),
+                    rs.getString("keterangan"),
+                    rs.getString("tanggal")
+                });
+            }
+
+            tabeldet.setModel(tblDet);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
-     
-      private void clear(){
+
+    private void clear() {
         txtTransaksi.setText("");
         txtNama.setText("");
         txtJumlah.setText("");
@@ -579,44 +516,40 @@ public class MasterOrder extends javax.swing.JFrame {
         txtBahan.setText("");
         txtKeterangan.setText("");
         table();
-        
     }
-   private void edit() {
-        try{
-            Connection kon = KoneksiKashoes.koneksikashoesdB();
-            Statement st = kon.createStatement();
-           
-                String sql_up = "UPDATE transaksi SET nama='" + txtNama.getText()
-                        + "',jml_sepatu='" + txtJumlah.getText()
-                        + "',no_telp='" + txtTelephone.getText()+"' WHERE id_transaksi='"+txtTransaksi.getText()+"'";
-                        
-                st.execute(sql_up);
-                JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
-            
-        }
-        catch(Exception e){
+
+    private void edit() {
+        try {
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+
+            String sql_up = "UPDATE transaksi SET nama='" + txtNama.getText()
+                    + "',jml_sepatu='" + txtJumlah.getText()
+                    + "',no_telp='" + txtTelephone.getText()
+                    + "' WHERE id_transaksi='" + txtTransaksi.getText() + "'";
+
+            st.execute(sql_up);
+            JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    
-}
 
+    }
 
-
-     private void hapus(){
-        int update= JOptionPane.showOptionDialog(this,"apakah yakin hapus data?","Hapus Data",
-                JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
-            if(update == JOptionPane.YES_OPTION){
-            try{
-                 Connection kon = KoneksiKashoes.koneksikashoesdB();
-                 Statement st = kon.createStatement();
-                 String sql_del = "DELETE from transaksi WHERE id_transaksi='"+txtTransaksi.getText()+"'";
-                 st.execute(sql_del);
-                 JOptionPane.showMessageDialog(null, "Data Berhasil Di Hapus");
-                 table();
-             }
-             catch(Exception e){
-                 JOptionPane.showMessageDialog(null, e);
-             }
+    private void hapus() {
+        int update = JOptionPane.showOptionDialog(this, "apakah yakin hapus data?", "Hapus Data",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (update == JOptionPane.YES_OPTION) {
+            try {
+                cn = KoneksiKashoes.koneksikashoesdB();
+                st = cn.createStatement();
+                String sql_del = "DELETE from transaksi WHERE id_transaksi='" + txtTransaksi.getText() + "'";
+                st.execute(sql_del);
+                JOptionPane.showMessageDialog(null, "Data Berhasil Di Hapus");
+                table();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
             clear();
         }
     }
@@ -664,6 +597,7 @@ public class MasterOrder extends javax.swing.JFrame {
 //        System.out.println(e);
 //    }
 //    }
+
     /**
      * @param args the command line arguments
      */

@@ -6,6 +6,7 @@ package tugasakhir;
 
 import java.sql.*;
 import TugasAkhir.KoneksiKashoes;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,8 @@ public class Order extends javax.swing.JFrame {
         update();
         txtTransaksi.setText(generate_id());
         txtTransaksiDetil.setText(generate_idDet());
+        LocalDate currentDate = LocalDate.now();
+        txtTanggal.setText(currentDate.toString());
     }
 
     private void addRow(int x) {
@@ -93,6 +96,7 @@ public class Order extends javax.swing.JFrame {
         tbl.addColumn("Telephone");
         tbl.addColumn("Jumlah");
         tbl.addColumn("Total Harga");
+        tblket.addColumn("Tanggal");
         tblket.addColumn("Keterangan");
         Tabel.setModel(tbl);
         TabelKet.setModel(tblket);
@@ -100,7 +104,7 @@ public class Order extends javax.swing.JFrame {
             cn = KoneksiKashoes.koneksikashoesdB();
             st = cn.createStatement();
 
-            // Update tabel
+            // Update tabel tanpa setmodel
             rs = st.executeQuery("SELECT * FROM transaksi");
             while (rs.next()) {
                 tbl.addRow(new Object[]{
@@ -112,13 +116,17 @@ public class Order extends javax.swing.JFrame {
                 });
                 Tabel.setModel(tbl);
             }
-            
+
             // Update tabel keterangan
-            rs = st.executeQuery("SELECT keterangan FROM transaksi_detil");
+            rs = st.executeQuery("SELECT keterangan, tanggal FROM transaksi_detil");
             while (rs.next()) {
-                tblket.addRow(new Object[]{ rs.getString("keterangan") });
+                tblket.addRow(new Object[]{
+                    rs.getString("tanggal"),
+                    rs.getString("keterangan")
+                });
                 TabelKet.setModel(tblket);
             }
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
@@ -242,6 +250,8 @@ public class Order extends javax.swing.JFrame {
         manageOrder = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtTransaksiDetil = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtTanggal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -357,6 +367,8 @@ public class Order extends javax.swing.JFrame {
 
         txtTransaksiDetil.setEnabled(false);
 
+        jLabel3.setText("Tanggal");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -393,17 +405,12 @@ public class Order extends javax.swing.JFrame {
                                     .addComponent(jLabel9)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(71, 71, 71)
-                                                .addComponent(btOrder)))))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -415,7 +422,17 @@ public class Order extends javax.swing.JFrame {
                                         .addComponent(jLabel2)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtTransaksiDetil)))
-                                .addGap(120, 120, 120)))
+                                .addGap(120, 120, 120))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(71, 71, 71)
+                                        .addComponent(btOrder))
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -424,13 +441,8 @@ public class Order extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -463,15 +475,23 @@ public class Order extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btOrder)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(47, 47, 47)))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btOrder))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(manageOrder)
-                .addContainerGap())
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -527,6 +547,7 @@ public class Order extends javax.swing.JFrame {
         String jml_sepatu = txtJumlah.getText();
         String total_bayar = txtTotal.getText();
         String keterangan = txtKeterangan.getText();
+        String tanggal = txtTanggal.getText();
         String bahan = cmbBahan.getSelectedItem().toString();
         String id_paket = cmbPaket.getSelectedItem().toString();
 
@@ -556,7 +577,7 @@ public class Order extends javax.swing.JFrame {
         // Insert transaksi detil
         try {
             // Connect
-            String sql = "INSERT INTO transaksi_detil (id_transaksidetil, id_transaksi, id_paket, bahan, keterangan) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO transaksi_detil (id_transaksidetil, id_transaksi, id_paket, bahan, keterangan, tanggal) VALUES (?, ?, ?, ?, ?, ?)";
             
             cn = KoneksiKashoes.koneksikashoesdB();
             pst = cn.prepareStatement(sql);
@@ -567,6 +588,7 @@ public class Order extends javax.swing.JFrame {
             pst.setString(3, id_paket);
             pst.setString(4, bahan);
             pst.setString(5, keterangan);
+            pst.setString(6, tanggal);
 
             // Execute
             pst.executeUpdate();
@@ -638,6 +660,7 @@ public class Order extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cmbPaket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -651,6 +674,7 @@ public class Order extends javax.swing.JFrame {
     public javax.swing.JTextField txtJumlah;
     public javax.swing.JTextArea txtKeterangan;
     public javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtTanggal;
     public javax.swing.JTextField txtTelephone;
     private javax.swing.JTextField txtTotal;
     public javax.swing.JTextField txtTransaksi;
