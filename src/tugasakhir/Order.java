@@ -261,6 +261,11 @@ public class Order extends javax.swing.JFrame {
         });
 
         txtTransaksi.setEnabled(false);
+        txtTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTransaksiActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Total Harga");
 
@@ -401,15 +406,16 @@ public class Order extends javax.swing.JFrame {
                                                 .addComponent(btOrder)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(21, 21, 21)
-                                .addComponent(txtTransaksi)
-                                .addGap(130, 130, 130))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTransaksiDetil)
-                                .addGap(130, 130, 130)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(txtTransaksi))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtTransaksiDetil)))
+                                .addGap(120, 120, 120)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -583,6 +589,10 @@ public class Order extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_manageOrderActionPerformed
 
+    private void txtTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTransaksiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTransaksiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -624,8 +634,8 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JTable TabelProses;
     private javax.swing.JButton btOrder;
     private javax.swing.JButton btProses;
-    private javax.swing.JComboBox<String> cmbBahan;
-    private javax.swing.JComboBox<String> cmbPaket;
+    public javax.swing.JComboBox<String> cmbBahan;
+    public javax.swing.JComboBox<String> cmbPaket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -644,6 +654,6 @@ public class Order extends javax.swing.JFrame {
     public javax.swing.JTextField txtTelephone;
     private javax.swing.JTextField txtTotal;
     public javax.swing.JTextField txtTransaksi;
-    private javax.swing.JTextField txtTransaksiDetil;
+    public javax.swing.JTextField txtTransaksiDetil;
     // End of variables declaration//GEN-END:variables
 }
