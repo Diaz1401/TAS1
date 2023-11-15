@@ -50,7 +50,6 @@ public class MasterOrder extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabeldet = new javax.swing.JTable();
         btsimpan = new javax.swing.JButton();
-        btubah = new javax.swing.JButton();
         bthapus = new javax.swing.JButton();
         bttambah = new javax.swing.JButton();
         txtTransaksi = new javax.swing.JTextField();
@@ -107,17 +106,10 @@ public class MasterOrder extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabeldet);
 
-        btsimpan.setText("simpan");
+        btsimpan.setText("Simpan");
         btsimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btsimpanActionPerformed(evt);
-            }
-        });
-
-        btubah.setText("ubah");
-        btubah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btubahActionPerformed(evt);
             }
         });
 
@@ -207,16 +199,13 @@ public class MasterOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btsimpan)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btubah))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bthapus))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bthapus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bttambah))))
+                            .addComponent(bttambah)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -270,7 +259,6 @@ public class MasterOrder extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsimpan)
-                    .addComponent(btubah)
                     .addComponent(bthapus)
                     .addComponent(bttambah))
                 .addGap(30, 30, 30)
@@ -325,15 +313,6 @@ public class MasterOrder extends javax.swing.JFrame {
         tableDet();
         clear();
     }//GEN-LAST:event_btsimpanActionPerformed
-
-    private void btubahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btubahActionPerformed
-        // TODO add your handling code here:
-        edit();
-        table();
-        tableDet();
-        clear();
-
-    }//GEN-LAST:event_btubahActionPerformed
 
     private void bthapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthapusActionPerformed
         // TODO add your handling code here:
@@ -496,7 +475,7 @@ public class MasterOrder extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
-        String iddet = "TRD" + String.valueOf(generate_id() + 1);
+        String iddet = "TRD" + String.valueOf(row + 1);
 
         return iddet;
     }
@@ -719,7 +698,6 @@ public class MasterOrder extends javax.swing.JFrame {
     private javax.swing.JButton bthapus;
     private javax.swing.JButton btsimpan;
     private javax.swing.JButton bttambah;
-    private javax.swing.JButton btubah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
