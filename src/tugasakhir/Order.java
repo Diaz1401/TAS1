@@ -201,7 +201,7 @@ public class Order extends javax.swing.JFrame {
                 if (rs.next()) paket = rs.getString("paket");
                 txtketerangan += bahan + "+" + paket + ", ";
             }
-            txtKeterangan.setText(generate_id() + ": " + txtketerangan);
+            txtKeterangan.setText(generate_idDet() + ": " + txtketerangan);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
