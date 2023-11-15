@@ -210,17 +210,18 @@ public class Order extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtJumlah = new javax.swing.JTextField();
         cmbPaket = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        btOrder = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabel = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btProses = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelKet = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtKeterangan = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         TabelProses = new javax.swing.JTable();
+        manageOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -262,10 +263,10 @@ public class Order extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Order");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btOrder.setText("Order");
+        btOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btOrderActionPerformed(evt);
             }
         });
 
@@ -281,10 +282,10 @@ public class Order extends javax.swing.JFrame {
 
         jLabel8.setText("Keterangan");
 
-        jButton1.setText("Proses");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btProses.setText("Proses");
+        btProses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btProsesActionPerformed(evt);
             }
         });
 
@@ -320,6 +321,13 @@ public class Order extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(TabelProses);
 
+        manageOrder.setText("Management");
+        manageOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,7 +349,7 @@ public class Order extends javax.swing.JFrame {
                                     .addComponent(txtTransaksi)
                                     .addComponent(txtTelephone))
                                 .addGap(23, 23, 23)
-                                .addComponent(jButton1))
+                                .addComponent(btProses))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
                                 .addComponent(cmbBahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,11 +371,14 @@ public class Order extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(71, 71, 71)
-                                        .addComponent(jButton2)))))
-                        .addGap(0, 6, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btOrder)))))
+                        .addGap(0, 6, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(manageOrder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -391,7 +402,7 @@ public class Order extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1))
+                                .addComponent(btProses))
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -405,16 +416,17 @@ public class Order extends javax.swing.JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
+                            .addComponent(btOrder)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6)
                                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(85, 85, 85))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(manageOrder))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -462,7 +474,7 @@ public class Order extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJumlahActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOrderActionPerformed
         String id_transaksi = txtTransaksi.getText();
         String nama = txtNama.getText();
         String no_telp = txtTelephone.getText();
@@ -473,6 +485,7 @@ public class Order extends javax.swing.JFrame {
         try {
             // Connect
             String sql = "INSERT INTO transaksi (id_transaksi, nama, no_telp, jml_sepatu, total_bayar, keterangan) VALUES (?, ?, ?, ?, ?, ?)";
+            
             cn = KoneksiKashoes.koneksikashoesdB();
             pst = cn.prepareStatement(sql);
 
@@ -493,11 +506,17 @@ public class Order extends javax.swing.JFrame {
         }
         // Update table
         update();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btOrderActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProsesActionPerformed
         addRow(Integer.parseInt(txtJumlah.getText()));
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btProsesActionPerformed
+
+    private void manageOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrderActionPerformed
+        // TODO add your handling code here:
+        new MasterOrder().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_manageOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -535,28 +554,29 @@ public class Order extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Tabel;
-    private javax.swing.JTable TabelKet;
+    public javax.swing.JTable Tabel;
+    public javax.swing.JTable TabelKet;
     private javax.swing.JTable TabelProses;
+    private javax.swing.JButton btOrder;
+    private javax.swing.JButton btProses;
     private javax.swing.JComboBox<String> cmbBahan;
     private javax.swing.JComboBox<String> cmbPaket;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextField txtJumlah;
-    private javax.swing.JTextArea txtKeterangan;
-    private javax.swing.JTextField txtNama;
-    private javax.swing.JTextField txtTelephone;
+    private javax.swing.JButton manageOrder;
+    public javax.swing.JTextField txtJumlah;
+    public javax.swing.JTextArea txtKeterangan;
+    public javax.swing.JTextField txtNama;
+    public javax.swing.JTextField txtTelephone;
     private javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtTransaksi;
+    public javax.swing.JTextField txtTransaksi;
     // End of variables declaration//GEN-END:variables
 }
