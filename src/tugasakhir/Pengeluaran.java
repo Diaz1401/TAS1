@@ -31,10 +31,10 @@ public class Pengeluaran extends javax.swing.JFrame {
     }
      public void datatable() {
         DefaultTableModel tbl = new DefaultTableModel();
-        tbl.addColumn("id_pengeluaran");
-        tbl.addColumn("kode_biaya");
-        tbl.addColumn("nominal");
-        tbl.addColumn("tanggal");
+        tbl.addColumn("ID Pengeluaran");
+        tbl.addColumn("Kode Biaya");
+        tbl.addColumn("Nominal");
+        tbl.addColumn("Tanggal");
         Tabel.setModel(tbl);
         try {
             cn = KoneksiKashoes.koneksikashoesdB();
@@ -79,6 +79,7 @@ public class Pengeluaran extends javax.swing.JFrame {
         txtpengeluaran = new javax.swing.JTextField();
         txtnominal1 = new javax.swing.JLabel();
         txttanggal = new javax.swing.JTextField();
+        Simpan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +121,13 @@ public class Pengeluaran extends javax.swing.JFrame {
             }
         });
 
+        Simpan.setText("Simpan");
+        Simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SimpanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,11 +152,14 @@ public class Pengeluaran extends javax.swing.JFrame {
                                     .addComponent(txtTarif, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtkodebiaya, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(78, 78, 78)
                         .addComponent(Tambah)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Hapus)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Hapus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Simpan))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -173,11 +184,13 @@ public class Pengeluaran extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtnominal1)
                             .addComponent(txttanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Tambah))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Hapus)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Hapus)
+                    .addComponent(Simpan))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -254,6 +267,44 @@ public class Pengeluaran extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txttanggalActionPerformed
 
+    private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
+        // Get the selected row index
+        int row = Tabel.getSelectedRow();
+        if (row < 0) {
+            // No row is selected, show an error message
+            JOptionPane.showMessageDialog(null, "Pilih data yang akan disimpan");
+            return;
+        }
+
+        // Get the value of the column in the selected row
+        String id_pengeluaran = Tabel.getValueAt(row, 0).toString();
+        String kode_biaya = Tabel.getValueAt(row, 1).toString();
+        String nominal = Tabel.getValueAt(row, 2).toString();
+        String tanggal = Tabel.getValueAt(row, 3).toString();
+
+        try {
+            // Connect
+            String sql = "UPDATE pengeluaran SET kode_biaya = ?, nominal = ?, tanggal = ? WHERE id_pengeluaran = ?";
+            cn = KoneksiKashoes.koneksikashoesdB();
+            pst = cn.prepareStatement(sql);
+
+            // Set the parameter values
+            pst.setString(1, kode_biaya);
+            pst.setString(2, nominal);
+            pst.setString(3, tanggal);
+            pst.setString(4, id_pengeluaran);
+
+            // Execute the statement
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal mengubah data: " + e.getMessage());
+        }
+        // Update table
+        datatable();
+    }//GEN-LAST:event_SimpanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,6 +342,7 @@ public class Pengeluaran extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Hapus;
+    private javax.swing.JButton Simpan;
     private javax.swing.JTable Tabel;
     private javax.swing.JButton Tambah;
     private javax.swing.JLabel jLabel1;
