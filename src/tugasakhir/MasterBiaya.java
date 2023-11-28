@@ -40,7 +40,7 @@ public class MasterBiaya extends javax.swing.JFrame {
             st = cn.createStatement();
 
             // Update tabel
-            ResultSet rs = st.executeQuery("SELECT * FROM master_biaya ORDER BY kode_biaya ASC;");
+            rs = st.executeQuery("SELECT * FROM master_biaya ORDER BY kode_biaya ASC;");
             while (rs.next()) {
                 tbl.addRow(new Object[]{
                     rs.getString("kode_biaya"),

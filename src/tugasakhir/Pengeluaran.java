@@ -28,6 +28,20 @@ public class Pengeluaran extends javax.swing.JFrame {
         datatable();
         LocalDate currentDate = LocalDate.now();
         txttanggal.setText(currentDate.toString());
+        update_cmb();
+    }
+    public void update_cmb() {
+        try {
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+            rs = st.executeQuery("SELECT kode_biaya FROM master_biaya");
+            while (rs.next()) {
+                String column = rs.getString("kode_biaya");
+                cmbKode.addItem(column);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
+        }
     }
      public void datatable() {
         DefaultTableModel tbl = new DefaultTableModel();
@@ -67,7 +81,6 @@ public class Pengeluaran extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtkodebiaya = new javax.swing.JTextField();
         txtTarif = new javax.swing.JTextField();
         Tambah = new javax.swing.JButton();
         Hapus = new javax.swing.JButton();
@@ -80,6 +93,7 @@ public class Pengeluaran extends javax.swing.JFrame {
         txtnominal1 = new javax.swing.JLabel();
         txttanggal = new javax.swing.JTextField();
         Simpan = new javax.swing.JButton();
+        cmbKode = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +142,8 @@ public class Pengeluaran extends javax.swing.JFrame {
             }
         });
 
+        cmbKode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kode Biaya" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,10 +163,10 @@ public class Pengeluaran extends javax.swing.JFrame {
                                     .addComponent(txtnominal)
                                     .addComponent(txtnominal1))
                                 .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txttanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTarif, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtkodebiaya, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txttanggal, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(txtTarif, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(cmbKode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addComponent(Tambah)))
@@ -175,7 +191,7 @@ public class Pengeluaran extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtkodebiaya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtnominal)
@@ -198,14 +214,14 @@ public class Pengeluaran extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
-        if (txtpengeluaran.getText().isEmpty() || txtkodebiaya.getText().isEmpty()
+        if (txtpengeluaran.getText().isEmpty() 
             || txtTarif.getText().isEmpty() || txttanggal.getText().isEmpty()) {
             // Show an error message
             JOptionPane.showMessageDialog(null, "Semua kolom harus diisi");
             return;
         }
         String id_pengeluaran = txtpengeluaran.getText();
-        String kode_biaya = txtkodebiaya.getText();
+        String kode_biaya = cmbKode.getSelectedItem().toString();
         String nominal = txtTarif.getText();
         String tanggal = txttanggal.getText();
 
@@ -345,11 +361,11 @@ public class Pengeluaran extends javax.swing.JFrame {
     private javax.swing.JButton Simpan;
     private javax.swing.JTable Tabel;
     private javax.swing.JButton Tambah;
+    private javax.swing.JComboBox<String> cmbKode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtTarif;
-    private javax.swing.JTextField txtkodebiaya;
     private javax.swing.JLabel txtnominal;
     private javax.swing.JLabel txtnominal1;
     private javax.swing.JTextField txtpengeluaran;
