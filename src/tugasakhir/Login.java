@@ -138,7 +138,14 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void isadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isadminActionPerformed
-        // TODO add your handling code here:
+        /*check if login as admin*/
+        if (isadmin.isSelected()) {
+            user.enable(false);
+            user.setText("admin");
+        } else {
+            user.enable(true);
+            user.setText("");
+        }
     }//GEN-LAST:event_isadminActionPerformed
 
     /**
