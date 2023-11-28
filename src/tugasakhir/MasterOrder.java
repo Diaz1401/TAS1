@@ -52,7 +52,6 @@ public class MasterOrder extends javax.swing.JFrame {
         TabelDet = new javax.swing.JTable();
         btsimpan = new javax.swing.JButton();
         bthapus = new javax.swing.JButton();
-        bttambah = new javax.swing.JButton();
         txtTransaksi = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
@@ -120,13 +119,6 @@ public class MasterOrder extends javax.swing.JFrame {
         bthapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bthapusActionPerformed(evt);
-            }
-        });
-
-        bttambah.setText("Tambah");
-        bttambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttambahActionPerformed(evt);
             }
         });
 
@@ -210,16 +202,13 @@ public class MasterOrder extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btsimpan)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(bthapus))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bttambah)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Bersih))))
+                            .addComponent(Bersih)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -271,7 +260,6 @@ public class MasterOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsimpan)
                     .addComponent(bthapus)
-                    .addComponent(bttambah)
                     .addComponent(Bersih))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,13 +419,6 @@ public class MasterOrder extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_bthapusActionPerformed
 
-    private void bttambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttambahActionPerformed
-        // TODO add your handling code here:
-        tambah();
-        table();
-        clear();
-    }//GEN-LAST:event_bttambahActionPerformed
-
     private void TabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelMouseClicked
         // TODO add your handling code here:
         int bar = Tabel.getSelectedRow();
@@ -538,26 +519,6 @@ public class MasterOrder extends javax.swing.JFrame {
         String iddet = "TRD" + String.valueOf(row + 1);
 
         return iddet;
-    }
-
-    private void tambah() {
-        try {
-
-            cn = KoneksiKashoes.koneksikashoesdB();
-            st = cn.createStatement();
-
-            pst = cn.prepareStatement("INSERT INTO transaksi (id_transaksi,nama,no_telp,jml_sepatu,total_bayar) VALUES(?,?,?,?,?)");
-
-            pst.setString(1, txtTransaksi.getText());
-            pst.setString(2, txtNama.getText());
-            pst.setString(3, txtJumlah.getText());
-            pst.setString(4, txtTelephone.getText());
-            pst.setString(5, txtTotal.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Di Masukan");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Gagal menambahkan data: " + e.getMessage());
-        }
     }
 
     private void table() {
@@ -719,7 +680,6 @@ public class MasterOrder extends javax.swing.JFrame {
     private javax.swing.JTable TabelDet;
     private javax.swing.JButton bthapus;
     private javax.swing.JButton btsimpan;
-    private javax.swing.JButton bttambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
