@@ -30,16 +30,35 @@ public class Pengeluaran extends javax.swing.JFrame {
         LocalDate currentDate = LocalDate.now();
         txttanggal.setText(currentDate.toString());
         update_cmb();
+        txtpengeluaran.setText(generate_id());
+    }
+
+    public String generate_id() {
+        int row = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM pengeluaran";
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                row = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
+        }
+        String id = "PENGELUARAN" + String.valueOf(row + 1);
+        return id;
     }
 
     public void update_cmb() {
         try {
             cn = KoneksiKashoes.koneksikashoesdB();
             st = cn.createStatement();
-            rs = st.executeQuery("SELECT kode_biaya FROM master_biaya");
+            rs = st.executeQuery("SELECT * FROM master_biaya");
             while (rs.next()) {
                 String column = rs.getString("kode_biaya");
-                cmbKode.addItem(column);
+                String keterangan = rs.getString("keterangan");
+                cmbKode.addItem(column + " - " + keterangan);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
@@ -128,6 +147,8 @@ public class Pengeluaran extends javax.swing.JFrame {
         jLabel2.setText("Kode Biaya");
 
         txtnominal.setText("Nominal");
+
+        txtpengeluaran.setEnabled(false);
 
         txtnominal1.setText("Tanggal");
 
@@ -227,8 +248,7 @@ public class Pengeluaran extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
-        if (txtpengeluaran.getText().isEmpty()
-                || txtTarif.getText().isEmpty() || txttanggal.getText().isEmpty()) {
+        if (txtpengeluaran.getText().isEmpty() || txtTarif.getText().isEmpty() || txttanggal.getText().isEmpty()) {
             // Show an error message
             JOptionPane.showMessageDialog(null, "Semua kolom harus diisi");
             return;

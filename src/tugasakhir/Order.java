@@ -82,7 +82,8 @@ public class Order extends javax.swing.JFrame {
             rs = st.executeQuery("SELECT * FROM paket");
             while (rs.next()) {
                 String column = rs.getString("id_paket");
-                cmbPaket.addItem(column);
+                String keterangan = rs.getString("paket");
+                cmbPaket.addItem(column + " - " + keterangan);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());

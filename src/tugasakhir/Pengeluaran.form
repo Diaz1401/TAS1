@@ -165,6 +165,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtpengeluaran">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="txtnominal1">
       <Properties>

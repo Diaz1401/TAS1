@@ -27,6 +27,24 @@ public class MasterBiaya extends javax.swing.JFrame {
     public MasterBiaya() {
         initComponents();
         datatable();
+        txtbiaya.setText(generate_id());
+    }
+
+    public String generate_id() {
+        int row = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM master_biaya";
+            cn = KoneksiKashoes.koneksikashoesdB();
+            st = cn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                row = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
+        }
+        String id = "BIAYA" + String.valueOf(row + 1);
+        return id;
     }
 
     public void datatable() {
@@ -100,6 +118,8 @@ public class MasterBiaya extends javax.swing.JFrame {
                 btnhapusActionPerformed(evt);
             }
         });
+
+        txtbiaya.setEnabled(false);
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -233,10 +253,6 @@ public class MasterBiaya extends javax.swing.JFrame {
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
 
-        int row = table.getRowCount();
-
-        String kode_biaya = tabel.getValueAt(row, 0).toString();
-        txtbiaya.setText(kode_biaya);
     }//GEN-LAST:event_tabelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
