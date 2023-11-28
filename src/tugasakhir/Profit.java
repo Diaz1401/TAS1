@@ -30,12 +30,12 @@ public class Profit extends javax.swing.JFrame {
     }
 
     public int calc(int x, int y) {
-        int total = (int)Tabel.getValueAt(x, 2) - y;
+        int total = (int) Tabel.getValueAt(x, 2) - y;
         return total;
     }
 
     public void update_pengeluaran() {
-            int i = 0;
+        int i = 0;
         DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("Tahun/Bulan");
         tbl.addColumn("Total Pengeluaran");
@@ -58,7 +58,7 @@ public class Profit extends javax.swing.JFrame {
                 tbl.addRow(new Object[]{
                     monthYear,
                     totalPengeluaran,
-                    (int)Tabel.getValueAt(i, 2) - totalPengeluaran
+                    (int) Tabel.getValueAt(i, 2) - totalPengeluaran
                 });
                 TabelP.setModel(tbl);
                 i++;
@@ -201,8 +201,8 @@ public class Profit extends javax.swing.JFrame {
         int total = 0;
         int[] row = TabelP.getSelectedRows();
         for (int which : row) {
-                String value = TabelP.getValueAt(which, 2).toString();
-                total += Integer.parseInt(value);
+            String value = TabelP.getValueAt(which, 2).toString();
+            total += Integer.parseInt(value);
         }
         txtTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_HitungActionPerformed

@@ -267,7 +267,7 @@ public class MasterBiaya extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Get the selected row index
-        int row =   tabel.getSelectedRow();
+        int row = tabel.getSelectedRow();
         if (row < 0) {
             // No row is selected, show an error message
             JOptionPane.showMessageDialog(null, "Pilih data yang akan disimpan");

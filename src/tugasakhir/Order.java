@@ -19,7 +19,7 @@ public class Order extends javax.swing.JFrame {
     public static Connection cn;
     public static ResultSet rs;
     public static Statement st;
-    public static PreparedStatement pst;      
+    public static PreparedStatement pst;
 
     /**
      * Creates new form Order
@@ -138,7 +138,7 @@ public class Order extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel) TabelProses.getModel();
             int row = model.getRowCount();
-            
+
             // Scan kolom bahan + tambah harga
             for (int i = 0; i < row; i++) {
                 String value = model.getValueAt(i, 0).toString();
@@ -188,7 +188,7 @@ public class Order extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
-        txtTotal.setText(String.valueOf(tarif+rego));
+        txtTotal.setText(String.valueOf(tarif + rego));
     }
 
     public void keterangan() {
@@ -206,7 +206,9 @@ public class Order extends javax.swing.JFrame {
                 pst = cn.prepareStatement(sql);
                 pst.setString(1, model.getValueAt(i, 1).toString());
                 rs = pst.executeQuery();
-                if (rs.next()) paket = rs.getString("paket");
+                if (rs.next()) {
+                    paket = rs.getString("paket");
+                }
                 txtketerangan += bahan + "+" + paket + ", ";
             }
             txtKeterangan.setText(generate_idDet() + ": " + txtketerangan);
@@ -584,7 +586,7 @@ public class Order extends javax.swing.JFrame {
     }//GEN-LAST:event_txtJumlahActionPerformed
 
     private void btOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOrderActionPerformed
-        String id_transaksi = txtTransaksi.getText();                                    
+        String id_transaksi = txtTransaksi.getText();
         String id_transaksidetil = txtTransaksiDetil.getText();
         String nama = txtNama.getText();
         String no_telp = txtTelephone.getText();
@@ -599,7 +601,7 @@ public class Order extends javax.swing.JFrame {
         try {
             // Connect
             String sql = "INSERT INTO transaksi (id_transaksi, nama, no_telp, jml_sepatu, total_bayar) VALUES (?, ?, ?, ?, ?)";
-            
+
             cn = KoneksiKashoes.koneksikashoesdB();
             pst = cn.prepareStatement(sql);
 
@@ -617,12 +619,12 @@ public class Order extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal menyimpan data: " + e.getMessage());
         }
-        
+
         // Insert transaksi detil
         try {
             // Connect
             String sql = "INSERT INTO transaksi_detil (id_transaksidetil, id_transaksi, id_paket, bahan, keterangan, tanggal) VALUES (?, ?, ?, ?, ?, ?)";
-            
+
             cn = KoneksiKashoes.koneksikashoesdB();
             pst = cn.prepareStatement(sql);
 

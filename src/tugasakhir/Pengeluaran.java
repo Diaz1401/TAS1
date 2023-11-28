@@ -15,6 +15,7 @@ import java.time.LocalDate;
  * @author 3D_SERVICE
  */
 public class Pengeluaran extends javax.swing.JFrame {
+
     public static Connection cn;
     public static ResultSet rs;
     public static Statement st;
@@ -30,6 +31,7 @@ public class Pengeluaran extends javax.swing.JFrame {
         txttanggal.setText(currentDate.toString());
         update_cmb();
     }
+
     public void update_cmb() {
         try {
             cn = KoneksiKashoes.koneksikashoesdB();
@@ -43,7 +45,8 @@ public class Pengeluaran extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
     }
-     public void datatable() {
+
+    public void datatable() {
         DefaultTableModel tbl = new DefaultTableModel();
         tbl.addColumn("ID Pengeluaran");
         tbl.addColumn("Kode Biaya");
@@ -61,16 +64,14 @@ public class Pengeluaran extends javax.swing.JFrame {
                     rs.getString("id_pengeluaran"),
                     rs.getString("kode_biaya"),
                     rs.getString("nominal"),
-                    rs.getString("tanggal"),
-                });
+                    rs.getString("tanggal"),});
                 Tabel.setModel(tbl);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
         }
-        
-    }
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -226,8 +227,8 @@ public class Pengeluaran extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahActionPerformed
-        if (txtpengeluaran.getText().isEmpty() 
-            || txtTarif.getText().isEmpty() || txttanggal.getText().isEmpty()) {
+        if (txtpengeluaran.getText().isEmpty()
+                || txtTarif.getText().isEmpty() || txttanggal.getText().isEmpty()) {
             // Show an error message
             JOptionPane.showMessageDialog(null, "Semua kolom harus diisi");
             return;
@@ -292,7 +293,7 @@ public class Pengeluaran extends javax.swing.JFrame {
 
     private void txttanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttanggalActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txttanggalActionPerformed
 
     private void SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimpanActionPerformed
