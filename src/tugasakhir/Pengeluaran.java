@@ -94,6 +94,7 @@ public class Pengeluaran extends javax.swing.JFrame {
         txttanggal = new javax.swing.JTextField();
         Simpan = new javax.swing.JButton();
         cmbKode = new javax.swing.JComboBox<>();
+        Kembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,6 +145,13 @@ public class Pengeluaran extends javax.swing.JFrame {
 
         cmbKode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Kode Biaya" }));
 
+        Kembali.setText("Kembali");
+        Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KembaliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,7 +177,10 @@ public class Pengeluaran extends javax.swing.JFrame {
                                     .addComponent(cmbKode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
-                        .addComponent(Tambah)))
+                        .addComponent(Tambah))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Kembali)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -206,7 +217,8 @@ public class Pengeluaran extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Hapus)
-                    .addComponent(Simpan))
+                    .addComponent(Simpan)
+                    .addComponent(Kembali))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -321,6 +333,11 @@ public class Pengeluaran extends javax.swing.JFrame {
         datatable();
     }//GEN-LAST:event_SimpanActionPerformed
 
+    private void KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KembaliActionPerformed
+        new Order().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_KembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -358,6 +375,7 @@ public class Pengeluaran extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Hapus;
+    private javax.swing.JButton Kembali;
     private javax.swing.JButton Simpan;
     private javax.swing.JTable Tabel;
     private javax.swing.JButton Tambah;

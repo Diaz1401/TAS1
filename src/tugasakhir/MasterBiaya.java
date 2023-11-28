@@ -73,6 +73,7 @@ public class MasterBiaya extends javax.swing.JFrame {
         tabel = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        Kembali = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -129,14 +130,21 @@ public class MasterBiaya extends javax.swing.JFrame {
             }
         });
 
+        Kembali.setText("Kembali");
+        Kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KembaliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(labelketerangan)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -146,12 +154,12 @@ public class MasterBiaya extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(txtketerangan, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(316, 316, 316)
+                        .addComponent(Kembali)
+                        .addGap(231, 231, 231)
                         .addComponent(btnhapus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(labelbiaya)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtbiaya, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,7 +187,8 @@ public class MasterBiaya extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnhapus)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(Kembali))
                 .addContainerGap())
         );
 
@@ -290,6 +299,11 @@ public class MasterBiaya extends javax.swing.JFrame {
         datatable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KembaliActionPerformed
+        new Order().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_KembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -326,6 +340,7 @@ public class MasterBiaya extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Kembali;
     private javax.swing.JToggleButton btnhapus;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

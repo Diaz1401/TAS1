@@ -73,7 +73,6 @@ public class Management extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNama = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        Logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Management");
@@ -122,13 +121,6 @@ public class Management extends javax.swing.JFrame {
             }
         });
 
-        Logout.setText("Log Out");
-        Logout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,8 +159,7 @@ public class Management extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Logout)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -196,9 +187,7 @@ public class Management extends javax.swing.JFrame {
                     .addComponent(Hapus)
                     .addComponent(Simpan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(Logout))
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -309,11 +298,6 @@ public class Management extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        new Login().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_LogoutActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -351,7 +335,6 @@ public class Management extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Hapus;
-    private javax.swing.JButton Logout;
     private javax.swing.JButton Simpan;
     private javax.swing.JTable Tabel;
     private javax.swing.JButton Tambah;
