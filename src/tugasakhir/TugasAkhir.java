@@ -4,6 +4,8 @@
  */
 package tugasakhir;
 
+import login.Login;
+
 /**
  *
  * @author Diaz
