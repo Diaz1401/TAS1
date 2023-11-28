@@ -252,6 +252,9 @@ public class Order extends javax.swing.JFrame {
         txtTransaksiDetil = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtTanggal = new javax.swing.JTextField();
+        MasterBiaya = new javax.swing.JButton();
+        Pengeluaran = new javax.swing.JButton();
+        Profit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -369,6 +372,22 @@ public class Order extends javax.swing.JFrame {
 
         jLabel3.setText("Tanggal");
 
+        MasterBiaya.setText("Biaya");
+        MasterBiaya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MasterBiayaActionPerformed(evt);
+            }
+        });
+
+        Pengeluaran.setText("Pengeluaran");
+        Pengeluaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PengeluaranActionPerformed(evt);
+            }
+        });
+
+        Profit.setText("Profit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -378,7 +397,13 @@ public class Order extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(manageOrder)
-                        .addGap(0, 715, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MasterBiaya)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Pengeluaran)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Profit)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -391,7 +416,7 @@ public class Order extends javax.swing.JFrame {
                                                     .addComponent(jLabel7))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtJumlah)
+                                                    .addComponent(txtJumlah, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                                     .addComponent(txtNama)
                                                     .addComponent(txtTelephone))
                                                 .addGap(23, 23, 23)
@@ -489,9 +514,13 @@ public class Order extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(manageOrder)
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(manageOrder)
+                    .addComponent(MasterBiaya)
+                    .addComponent(Pengeluaran)
+                    .addComponent(Profit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -615,6 +644,16 @@ public class Order extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTransaksiActionPerformed
 
+    private void MasterBiayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasterBiayaActionPerformed
+        new MasterBiaya().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_MasterBiayaActionPerformed
+
+    private void PengeluaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PengeluaranActionPerformed
+        new Pengeluaran().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_PengeluaranActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -651,6 +690,9 @@ public class Order extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton MasterBiaya;
+    private javax.swing.JButton Pengeluaran;
+    private javax.swing.JButton Profit;
     public javax.swing.JTable Tabel;
     public javax.swing.JTable TabelKet;
     private javax.swing.JTable TabelProses;

@@ -88,15 +88,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane3" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtTotal" min="-2" pref="77" max="-2" attributes="0"/>
-                                  <Component id="txtKode" min="-2" pref="110" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="txtTotal" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Component id="txtKode" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace min="38" max="32767" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txtBahan" min="-2" pref="94" max="-2" attributes="0"/>
@@ -211,7 +208,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tabeldet">
+        <Component class="javax.swing.JTable" name="TabelDet">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="0"/>
@@ -221,7 +218,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabeldetMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TabelDetMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -236,7 +233,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="bthapus">
       <Properties>
-        <Property name="text" type="java.lang.String" value="hapus"/>
+        <Property name="text" type="java.lang.String" value="Hapus"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bthapusActionPerformed"/>
@@ -244,7 +241,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="bttambah">
       <Properties>
-        <Property name="text" type="java.lang.String" value="tambah"/>
+        <Property name="text" type="java.lang.String" value="Tambah"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bttambahActionPerformed"/>

@@ -49,7 +49,7 @@ public class MasterOrder extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabel = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabeldet = new javax.swing.JTable();
+        TabelDet = new javax.swing.JTable();
         btsimpan = new javax.swing.JButton();
         bthapus = new javax.swing.JButton();
         bttambah = new javax.swing.JButton();
@@ -93,7 +93,7 @@ public class MasterOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabel);
 
-        tabeldet.setModel(new javax.swing.table.DefaultTableModel(
+        TabelDet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -101,12 +101,12 @@ public class MasterOrder extends javax.swing.JFrame {
 
             }
         ));
-        tabeldet.addMouseListener(new java.awt.event.MouseAdapter() {
+        TabelDet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabeldetMouseClicked(evt);
+                TabelDetMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tabeldet);
+        jScrollPane2.setViewportView(TabelDet);
 
         btsimpan.setText("Simpan");
         btsimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -115,14 +115,14 @@ public class MasterOrder extends javax.swing.JFrame {
             }
         });
 
-        bthapus.setText("hapus");
+        bthapus.setText("Hapus");
         bthapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bthapusActionPerformed(evt);
             }
         });
 
-        bttambah.setText("tambah");
+        bttambah.setText("Tambah");
         bttambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttambahActionPerformed(evt);
@@ -240,15 +240,11 @@ public class MasterOrder extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(38, 38, 38)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(txtBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,8 +309,65 @@ public class MasterOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsimpanActionPerformed
-        // TODO add your handling code here:
-        edit();
+        // Get the selected row index
+        int row = Tabel.getSelectedRow();
+        int rowdet = TabelDet.getSelectedRow();
+        if (row < 0 && rowdet < 0) {
+            // No row is selected, show an error message
+            JOptionPane.showMessageDialog(null, "Pilih data yang akan diubah");
+            return;
+        }
+        try {
+            if (row >= 0) {
+                // tabel transaksi
+                String id_transaksi_pk = Tabel.getValueAt(row, 0).toString();
+                String nama = Tabel.getValueAt(row, 1).toString();
+                String no_telp = Tabel.getValueAt(row, 2).toString();
+                String jml_sepatu = Tabel.getValueAt(row, 3).toString();
+                String total_bayar = Tabel.getValueAt(row, 4).toString();
+                // Connect
+                cn = KoneksiKashoes.koneksikashoesdB();
+
+                // Set the parameter values
+                String sql = "UPDATE transaksi SET nama = ?, no_telp = ?, jml_sepatu = ?, total_bayar = ? WHERE id_transaksi = ?";
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, nama);
+                pst.setString(2, no_telp);
+                pst.setString(3, jml_sepatu);
+                pst.setString(4, total_bayar);
+                pst.setString(5, id_transaksi_pk);
+                // Execute the statement
+                pst.executeUpdate();
+            }
+            if (rowdet >= 0) {
+                // tabel transaksi detil
+                String id_transaksidetil = TabelDet.getValueAt(row, 0).toString();
+                String id_transaksi_fk = TabelDet.getValueAt(row, 1).toString();
+                String id_paket = TabelDet.getValueAt(row, 2).toString();
+                String bahan = TabelDet.getValueAt(row, 3).toString();
+                String keterangan = TabelDet.getValueAt(row, 4).toString();
+                String tanggal = TabelDet.getValueAt(row, 5).toString();
+                // Connect
+                cn = KoneksiKashoes.koneksikashoesdB();
+
+                // Set the parameter values
+                String sqldet = "UPDATE transaksi_detil SET id_transaksi = ?, id_paket = ?, bahan = ?, keterangan = ?, tanggal = ? WHERE id_transaksidetil = ?";
+                pst = cn.prepareStatement(sqldet);
+                pst.setString(1, id_transaksi_fk);
+                pst.setString(2, id_paket);
+                pst.setString(3, bahan);
+                pst.setString(4, keterangan);
+                pst.setString(5, tanggal);
+                pst.setString(6, id_transaksidetil);
+                // Execute the statement
+                pst.executeUpdate();
+
+            }
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal mengubah data: " + e.getMessage());
+        }
+        // Update table
         table();
         clear();
     }//GEN-LAST:event_btsimpanActionPerformed
@@ -347,6 +400,8 @@ public class MasterOrder extends javax.swing.JFrame {
         txtJumlah.setText(c);
         txtTelephone.setText(d);
         txtTotal.setText(e);
+        TabelDet.setRowSelectionInterval(bar, bar);
+        TabelDet.scrollRectToVisible(TabelDet.getCellRect(bar, 0, true));
     }//GEN-LAST:event_TabelMouseClicked
 
     private void txtJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlahActionPerformed
@@ -361,21 +416,23 @@ public class MasterOrder extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTransaksiDetilActionPerformed
 
-    private void tabeldetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeldetMouseClicked
+    private void TabelDetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelDetMouseClicked
         // TODO add your handling code here:
-        int bar = tabeldet.getSelectedRow();
-        String a = tabeldet.getValueAt(bar, 0).toString();
-        String b = tabeldet.getValueAt(bar, 1).toString();
-        String c = tabeldet.getValueAt(bar, 2).toString();
-        String d = tabeldet.getValueAt(bar, 3).toString();
-        String e = tabeldet.getValueAt(bar, 4).toString();
+        int bar = TabelDet.getSelectedRow();
+        String a = TabelDet.getValueAt(bar, 0).toString();
+        String b = TabelDet.getValueAt(bar, 1).toString();
+        String c = TabelDet.getValueAt(bar, 2).toString();
+        String d = TabelDet.getValueAt(bar, 3).toString();
+        String e = TabelDet.getValueAt(bar, 4).toString();
 
         txtTransaksiDetil.setText(a);
         txtTransaksi.setText(b);
         txtKode.setText(c);
         txtBahan.setText(d);
         txtKeterangan.setText(e);
-    }//GEN-LAST:event_tabeldetMouseClicked
+        Tabel.setRowSelectionInterval(bar, bar);
+        Tabel.scrollRectToVisible(Tabel.getCellRect(bar, 0, true));
+    }//GEN-LAST:event_TabelDetMouseClicked
 
     private void txtKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKodeActionPerformed
         // TODO add your handling code here:
@@ -499,7 +556,7 @@ public class MasterOrder extends javax.swing.JFrame {
                 });
             }
 
-            tabeldet.setModel(tblDet);
+            TabelDet.setModel(tblDet);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -516,24 +573,6 @@ public class MasterOrder extends javax.swing.JFrame {
         txtBahan.setText("");
         txtKeterangan.setText("");
         table();
-    }
-
-    private void edit() {
-        try {
-            cn = KoneksiKashoes.koneksikashoesdB();
-            st = cn.createStatement();
-
-            String sql_up = "UPDATE transaksi SET nama='" + txtNama.getText()
-                    + "',jml_sepatu='" + txtJumlah.getText()
-                    + "',no_telp='" + txtTelephone.getText()
-                    + "' WHERE id_transaksi='" + txtTransaksi.getText() + "'";
-
-            st.execute(sql_up);
-            JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-
     }
 
     private void hapus() {
@@ -636,6 +675,7 @@ public class MasterOrder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Bersih;
     public javax.swing.JTable Tabel;
+    private javax.swing.JTable TabelDet;
     private javax.swing.JButton bthapus;
     private javax.swing.JButton btsimpan;
     private javax.swing.JButton bttambah;
@@ -652,7 +692,6 @@ public class MasterOrder extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tabeldet;
     public javax.swing.JTextField txtBahan;
     public javax.swing.JTextField txtJumlah;
     public javax.swing.JTextArea txtKeterangan;

@@ -122,8 +122,10 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Login Berhasil");
                 if (isadmin.isSelected()) {
                     new Management().setVisible(true);
+                    dispose();
                 } else {
                     new Order().setVisible(true);
+                    dispose();
                 }
             } else {
                 // Kombinasi email dan kata sandi tidak cocok
