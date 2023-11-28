@@ -57,8 +57,7 @@ public class Pengeluaran extends javax.swing.JFrame {
             rs = st.executeQuery("SELECT * FROM master_biaya");
             while (rs.next()) {
                 String column = rs.getString("kode_biaya");
-                String keterangan = rs.getString("keterangan");
-                cmbKode.addItem(column + " - " + keterangan);
+                cmbKode.addItem(column);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal memuat data: " + e.getMessage());
