@@ -384,7 +384,49 @@ public class MasterOrder extends javax.swing.JFrame {
 
     private void bthapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bthapusActionPerformed
         // TODO add your handling code here:
-        hapus();
+        int row = Tabel.getSelectedRow();
+        int rowdet = TabelDet.getSelectedRow();
+        if (row < 0 && rowdet < 0) {
+            // No row is selected, show an error message
+            JOptionPane.showMessageDialog(null, "Pilih data yang akan diubah");
+            return;
+        }
+        int update = JOptionPane.showOptionDialog(this, "apakah yakin hapus data?", "Hapus Data",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (update == JOptionPane.YES_OPTION) {
+            try {
+                if (row >= 0) {
+                    // tabel transaksi
+                    String id_transaksi = Tabel.getValueAt(row, 0).toString();
+                    // Connect
+                    cn = KoneksiKashoes.koneksikashoesdB();
+
+                    // Set the parameter values
+                    String sql = "DELETE from transaksi WHERE id_transaksi = ?";
+                    pst = cn.prepareStatement(sql);
+                    pst.setString(1, id_transaksi);
+                    // Execute the statement
+                    pst.executeUpdate();
+                }
+                if (rowdet >= 0) {
+                    // tabel transaksi detil
+                    String id_transaksidetil = TabelDet.getValueAt(row, 0).toString();
+                    // Connect
+                    cn = KoneksiKashoes.koneksikashoesdB();
+
+                    // Set the parameter values
+                    String sql = "DELETE from transaksi_detil WHERE id_transaksidetil = ?";
+                    pst = cn.prepareStatement(sql);
+                    pst.setString(1, id_transaksidetil);
+                    // Execute the statement
+                    pst.executeUpdate();
+
+                }
+                JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Gagal menghapus data: " + e.getMessage());
+            }
+        }
         table();
         clear();
     }//GEN-LAST:event_bthapusActionPerformed
@@ -590,23 +632,6 @@ public class MasterOrder extends javax.swing.JFrame {
         table();
     }
 
-    private void hapus() {
-        int update = JOptionPane.showOptionDialog(this, "apakah yakin hapus data?", "Hapus Data",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (update == JOptionPane.YES_OPTION) {
-            try {
-                cn = KoneksiKashoes.koneksikashoesdB();
-                st = cn.createStatement();
-                String sql_del = "DELETE from transaksi WHERE id_transaksi='" + txtTransaksi.getText() + "'";
-                st.execute(sql_del);
-                JOptionPane.showMessageDialog(null, "Data Berhasil Di Hapus");
-                table();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-            clear();
-        }
-    }
 //     private void cari() {
 //         DefaultTableModel model = new DefaultTableModel();
 //         int row = model.getRowCount();
