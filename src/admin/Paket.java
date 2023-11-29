@@ -92,9 +92,11 @@ public class Paket extends javax.swing.JFrame {
         Simpan = new javax.swing.JButton();
         Management = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Paket");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,11 +108,22 @@ public class Paket extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabel);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 6, 375, 275));
+
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Kode Paket");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 9, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nama Paket");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 37, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Tarif");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, -1, -1));
 
         txtKode.setEnabled(false);
         txtKode.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +131,9 @@ public class Paket extends javax.swing.JFrame {
                 txtKodeActionPerformed(evt);
             }
         });
+        getContentPane().add(txtKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 6, 100, -1));
+        getContentPane().add(txtPaket, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 34, 100, -1));
+        getContentPane().add(txtTarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 62, 100, -1));
 
         Tambah.setText("Tambah");
         Tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +141,7 @@ public class Paket extends javax.swing.JFrame {
                 TambahActionPerformed(evt);
             }
         });
+        getContentPane().add(Tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 96, -1, -1));
 
         Hapus.setText("Hapus");
         Hapus.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +149,7 @@ public class Paket extends javax.swing.JFrame {
                 HapusActionPerformed(evt);
             }
         });
+        getContentPane().add(Hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 287, -1, -1));
 
         Simpan.setText("Simpan");
         Simpan.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +157,7 @@ public class Paket extends javax.swing.JFrame {
                 SimpanActionPerformed(evt);
             }
         });
+        getContentPane().add(Simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 287, -1, -1));
 
         Management.setText("Management");
         Management.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +165,7 @@ public class Paket extends javax.swing.JFrame {
                 ManagementActionPerformed(evt);
             }
         });
+        getContentPane().add(Management, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 287, -1, -1));
 
         Logout.setText("Log Out");
         Logout.addActionListener(new java.awt.event.ActionListener() {
@@ -153,72 +173,10 @@ public class Paket extends javax.swing.JFrame {
                 LogoutActionPerformed(evt);
             }
         });
+        getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(501, 287, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPaket)
-                                    .addComponent(txtTarif)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(Tambah)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Management)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Hapus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Simpan)
-                .addGap(30, 30, 30)
-                .addComponent(Logout))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtPaket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtTarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Tambah))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Simpan)
-                    .addComponent(Hapus)
-                    .addComponent(Management)
-                    .addComponent(Logout))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admin/gambar/paket/Group 133.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -381,6 +339,7 @@ public class Paket extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtKode;
     private javax.swing.JTextField txtPaket;

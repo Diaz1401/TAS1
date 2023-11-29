@@ -24,6 +24,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setExtendedState(Login.MAXIMIZED_BOTH);
     }
 
     /**
@@ -40,73 +41,85 @@ public class Login extends javax.swing.JFrame {
         user = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
         isadmin = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Username");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 390, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 490, -1, -1));
 
+        user.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        user.setForeground(new java.awt.Color(35, 25, 87));
+        user.setBorder(null);
+        user.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        user.setDisabledTextColor(new java.awt.Color(35, 25, 87));
+        getContentPane().add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 430, 310, 30));
+
+        pass.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        pass.setForeground(new java.awt.Color(35, 25, 87));
+        pass.setBorder(null);
+        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 530, 320, 30));
+
+        isadmin.setBackground(new java.awt.Color(45, 22, 100));
+        isadmin.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        isadmin.setForeground(new java.awt.Color(255, 255, 255));
         isadmin.setText("Login sebagai admin?");
         isadmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isadminActionPerformed(evt);
             }
         });
+        getContentPane().add(isadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 580, 190, -1));
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/login/buton login.png"))); // NOI18N
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
             }
         });
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 580, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(pass))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(isadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jButton1)))
-                .addContainerGap(174, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(isadmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(151, Short.MAX_VALUE))
-        );
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/login/fieldlogin.png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 520, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/login/fieldlogin.png"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 420, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/login/login.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 220, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/login/bg login.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void isadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isadminActionPerformed
+        /*check if login as admin*/
+        if (isadmin.isSelected()) {
+            user.enable(false);
+            user.setText("admin");
+        } else {
+            user.enable(true);
+            user.setText("");
+        }
+    }//GEN-LAST:event_isadminActionPerformed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
         try {
             // Buat kueri SQL dengan tanda tanya sebagai placeholder
             String query = "SELECT * FROM signup WHERE email = ? AND password = ?";
@@ -137,18 +150,7 @@ public class Login extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Gagal: " + e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void isadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isadminActionPerformed
-        /*check if login as admin*/
-        if (isadmin.isSelected()) {
-            user.enable(false);
-            user.setText("admin");
-        } else {
-            user.enable(true);
-            user.setText("");
-        }
-    }//GEN-LAST:event_isadminActionPerformed
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -187,9 +189,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox isadmin;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
