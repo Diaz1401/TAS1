@@ -90,7 +90,7 @@ public class Login extends javax.swing.JFrame {
                 jLabel7MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 580, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1587, 600, 150, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/login/fieldlogin.png"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 520, -1, -1));
@@ -137,7 +137,7 @@ public class Login extends javax.swing.JFrame {
                     new Management().setVisible(true);
                     dispose();
                 } else {
-                    new Order().setVisible(true);
+                    new pegawai.Order().setVisible(true);
                     dispose();
                 }
             } else {

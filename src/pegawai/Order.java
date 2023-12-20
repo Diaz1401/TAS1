@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package tugasakhir;
+package pegawai;
 
 import java.sql.*;
 import TugasAkhir.KoneksiKashoes;
 import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tugasakhir.Login;
 
 /**
  *
@@ -91,16 +92,20 @@ public class Order extends javax.swing.JFrame {
     }
 
     public void update() {
-        DefaultTableModel tbl = new DefaultTableModel(), tblket = new DefaultTableModel();
+        DefaultTableModel tbl = new DefaultTableModel(), tbldet = new DefaultTableModel();
         tbl.addColumn("ID Transaksi");
         tbl.addColumn("Nama");
         tbl.addColumn("Telephone");
         tbl.addColumn("Jumlah");
         tbl.addColumn("Total Harga");
-        tblket.addColumn("Tanggal");
-        tblket.addColumn("Keterangan");
+        tbldet.addColumn("ID Transaksi detil");
+        tbldet.addColumn("ID transaksi");
+        tbldet.addColumn("ID_paket");
+        tbldet.addColumn("Bahan");
+        tbldet.addColumn("Keterangan");
+        tbldet.addColumn("Tanggal");
         Tabel.setModel(tbl);
-        TabelKet.setModel(tblket);
+        TabelKet.setModel(tbldet);
         try {
             cn = KoneksiKashoes.koneksikashoesdB();
             st = cn.createStatement();
@@ -119,13 +124,17 @@ public class Order extends javax.swing.JFrame {
             }
 
             // Update tabel keterangan
-            rs = st.executeQuery("SELECT keterangan, tanggal FROM transaksi_detil");
+            rs = st.executeQuery("SELECT id_transaksidetil, id_transaksi, id_paket, bahan, keterangan, tanggal FROM transaksi_detil");
             while (rs.next()) {
-                tblket.addRow(new Object[]{
-                    rs.getString("tanggal"),
-                    rs.getString("keterangan")
+                tbldet.addRow(new Object[]{
+                    rs.getString("id_transaksidetil"),
+                    rs.getString("id_transaksi"),
+                    rs.getString("id_paket"),
+                    rs.getString("bahan"),
+                    rs.getString("keterangan"),
+                    rs.getString("tanggal")
                 });
-                TabelKet.setModel(tblket);
+                TabelKet.setModel(tbldet);
             }
 
         } catch (SQLException e) {
@@ -227,6 +236,7 @@ public class Order extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel25 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cmbBahan = new javax.swing.JComboBox<>();
         txtTransaksi = new javax.swing.JTextField();
@@ -248,10 +258,11 @@ public class Order extends javax.swing.JFrame {
         TabelProses = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtTransaksiDetil = new javax.swing.JTextField();
+        txtKode = new javax.swing.JTextField();
         txtTanggal = new javax.swing.JTextField();
+        txtBahan = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -265,6 +276,8 @@ public class Order extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -274,6 +287,11 @@ public class Order extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel25.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(217, 217, 217));
+        jLabel25.setText("Kode");
+        getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 720, -1, 30));
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(217, 217, 217));
@@ -353,7 +371,7 @@ public class Order extends javax.swing.JFrame {
         txtTelephone.setBorder(null);
         txtTelephone.setCaretColor(new java.awt.Color(35, 25, 87));
         txtTelephone.setPreferredSize(new java.awt.Dimension(64, 34));
-        getContentPane().add(txtTelephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 570, 200, -1));
+        getContentPane().add(txtTelephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 570, 200, -1));
 
         jLabel9.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(217, 217, 217));
@@ -393,9 +411,14 @@ public class Order extends javax.swing.JFrame {
 
             }
         ));
+        Tabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabel);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 340, 770, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 340, 770, 200));
 
         TabelKet.setBackground(new java.awt.Color(108, 192, 0));
         TabelKet.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -408,9 +431,14 @@ public class Order extends javax.swing.JFrame {
 
             }
         ));
+        TabelKet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelKetMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TabelKet);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 665, 770, 280));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 550, 770, 160));
 
         TabelProses.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         TabelProses.setForeground(new java.awt.Color(35, 25, 87));
@@ -447,25 +475,41 @@ public class Order extends javax.swing.JFrame {
         txtTransaksiDetil.setPreferredSize(new java.awt.Dimension(64, 34));
         getContentPane().add(txtTransaksiDetil, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, 210, -1));
 
+        txtKode.setBackground(new java.awt.Color(108, 192, 0));
+        txtKode.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtKode.setForeground(new java.awt.Color(35, 25, 87));
+        txtKode.setBorder(null);
+        txtKode.setEnabled(false);
+        txtKode.setPreferredSize(new java.awt.Dimension(64, 22));
+        txtKode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKodeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtKode, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 750, 120, -1));
+
         txtTanggal.setBackground(new java.awt.Color(58, 42, 76));
         txtTanggal.setForeground(new java.awt.Color(125, 223, 0));
         txtTanggal.setBorder(null);
         getContentPane().add(txtTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, 80, -1));
+
+        txtBahan.setBackground(new java.awt.Color(108, 192, 0));
+        txtBahan.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtBahan.setForeground(new java.awt.Color(35, 25, 87));
+        txtBahan.setBorder(null);
+        txtBahan.setPreferredSize(new java.awt.Dimension(64, 34));
+        txtBahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBahanActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtBahan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 750, 120, 22));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/field tr (2).png"))); // NOI18N
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/Order.png"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, 30));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/Management.png"))); // NOI18N
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
-            }
-        });
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 170, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/Cost.png"))); // NOI18N
         jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -474,7 +518,7 @@ public class Order extends javax.swing.JFrame {
                 jLabel12MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 60, 30));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 60, 30));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/Expenditure.png"))); // NOI18N
         jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -483,7 +527,7 @@ public class Order extends javax.swing.JFrame {
                 jLabel13MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 160, 30));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 160, 160, 30));
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/bt proses.png"))); // NOI18N
         jLabel21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -501,7 +545,7 @@ public class Order extends javax.swing.JFrame {
                 jLabel14MouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 160, -1, 30));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, -1, 30));
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/Logout.png"))); // NOI18N
         jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -541,6 +585,19 @@ public class Order extends javax.swing.JFrame {
 
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/Vector.png"))); // NOI18N
         getContentPane().add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(1710, 50, -1, 40));
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/bi_save-fill.png"))); // NOI18N
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel24MouseClicked(evt);
+            }
+        });
+        getContentPane().add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(1590, 300, -1, -1));
+
+        jLabel27.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(217, 217, 217));
+        jLabel27.setText("Bahan");
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 720, -1, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pegawai/gambar/order/bg order.png"))); // NOI18N
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -667,28 +724,22 @@ public class Order extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        // TODO add your handling code here:
-         new MasterOrder().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jLabel11MouseClicked
-
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
-         new MasterBiaya().setVisible(true);
+         new pegawai.MasterBiaya().setVisible(true);
         
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
-        new Pengeluaran().setVisible(true);
+        new pegawai.Pengeluaran().setVisible(true);
         dispose();
        
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         // TODO add your handling code here:
-        new Profit().setVisible(true);
+        new pegawai.Profit().setVisible(true);
         
     }//GEN-LAST:event_jLabel14MouseClicked
 
@@ -701,6 +752,107 @@ public class Order extends javax.swing.JFrame {
     private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamaActionPerformed
+
+    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
+        // TODO add your handling code here:
+       try{
+            Connection kon = KoneksiKashoes.koneksikashoesdB();
+            Statement st = kon.createStatement();
+           
+                String sql_up = "UPDATE transaksi SET nama='" + txtNama.getText()
+                        + "',no_telp='" + txtTelephone.getText()
+                        + "',jml_sepatu='" + txtJumlah.getText()
+                         + "',total_bayar='" + txtTotal.getText()+"' WHERE id_transaksi='"+txtTransaksi.getText()+"'";
+                st.execute(sql_up);
+                JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+       
+       try{
+            Connection kon = KoneksiKashoes.koneksikashoesdB();
+            Statement st = kon.createStatement();
+           
+                String sql_up = "UPDATE transaksi_detil SET id_paket='" + txtKode.getText()
+                        + "',bahan='" + txtBahan.getText()
+                        + "',keterangan='" + txtKeterangan.getText()
+                         + "',tanggal='" + txtTanggal.getText()+"' WHERE id_transaksidetil='"+txtTransaksiDetil.getText()+"'";
+                st.execute(sql_up);
+                JOptionPane.showMessageDialog(null, "Data Berhasil di Update");
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        update();
+    }//GEN-LAST:event_jLabel24MouseClicked
+
+    private void txtKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKodeActionPerformed
+
+    private void txtBahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBahanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBahanActionPerformed
+
+    private void TabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelMouseClicked
+        // TODO add your handling code here:
+        int bar = Tabel.getSelectedRow();
+        String a = Tabel.getValueAt(bar, 0).toString();
+        String b = Tabel.getValueAt(bar, 1).toString();
+        String c = Tabel.getValueAt(bar, 3).toString();
+        String d = Tabel.getValueAt(bar, 2).toString();
+        String e = Tabel.getValueAt(bar, 4).toString();
+        String f = TabelKet.getValueAt(bar, 4).toString();
+        String g = TabelKet.getValueAt(bar, 2).toString();
+        String h = TabelKet.getValueAt(bar, 3).toString();
+        
+        txtTransaksi.setText(a);
+        txtNama.setText(b);
+        txtJumlah.setText(c);
+        txtTelephone.setText(d);
+        txtTotal.setText(e);
+        
+        txtKeterangan.setText(f);
+        txtKode.setText(g);
+        txtBahan.setText(h);
+        
+        TabelKet.setRowSelectionInterval(bar, bar);
+        TabelKet.scrollRectToVisible(TabelKet.getCellRect(bar, 0, true));
+        TabelKet.getValueAt(bar, 0);
+       
+    }//GEN-LAST:event_TabelMouseClicked
+
+    private void TabelKetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelKetMouseClicked
+        // TODO add your handling code here:
+        int bar = TabelKet.getSelectedRow();
+        String a = TabelKet.getValueAt(bar, 0).toString();
+        String b = TabelKet.getValueAt(bar, 1).toString();
+        String c = TabelKet.getValueAt(bar, 2).toString();
+        String d = TabelKet.getValueAt(bar, 3).toString();
+        String e = TabelKet.getValueAt(bar, 4).toString();
+        String f = Tabel.getValueAt(bar, 0).toString();
+        String g = Tabel.getValueAt(bar, 1).toString();
+        String h = Tabel.getValueAt(bar, 3).toString();
+        String i = Tabel.getValueAt(bar, 2).toString();
+        String j = Tabel.getValueAt(bar, 4).toString();
+        
+        txtTransaksiDetil.setText(a);
+        txtTransaksi.setText(b);
+        txtKode.setText(c);
+        txtBahan.setText(d);
+        txtKeterangan.setText(e);
+        
+        txtTransaksi.setText(f);
+        txtNama.setText(g);
+        txtJumlah.setText(h);
+        txtTelephone.setText(i);
+        txtTotal.setText(j);
+        Tabel.setRowSelectionInterval(bar, bar);
+        Tabel.scrollRectToVisible(Tabel.getCellRect(bar, 0, true));
+    }//GEN-LAST:event_TabelKetMouseClicked
 
     private void clear() {
         
@@ -755,7 +907,6 @@ public class Order extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cmbPaket;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -769,6 +920,9 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -779,8 +933,10 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JTextField txtBahan;
     public javax.swing.JTextField txtJumlah;
     private javax.swing.JTextField txtKeterangan;
+    public javax.swing.JTextField txtKode;
     public javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtTanggal;
     public javax.swing.JTextField txtTelephone;
